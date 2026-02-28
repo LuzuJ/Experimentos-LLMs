@@ -1,0 +1,10 @@
+{
+    "generation": 191,
+    "best_fitness": 0.5954745659187647,
+    "best_code": "def update_step(params, grads, state, hyperparams):\n    lr = hyperparams.get('lr', 0.05)\n    c1 = hyperparams.get('c1', 0.9)\n    \n    # Usar np.sign para ignorar magnitudes enga\u00f1osas\n    robust_grads = np.sign(grads)\n    \n    # Calcular la media robusta del vector de gradientes\n    # En lugar de usar np.mean (sensible a outliers), usamos np.median\n    m = state.get('m', 0.0)\n    m = c1 * m + (1 - c1) * np.median(robust_grads)\n    \n    # Escalar el learning rate usando la media robusta\n    scale = 1.0 / (np.abs(m) + 1.0)\n    \n    # Actualizar los pesos con el gradiente robusto\n    params = params - (lr * scale) * robust_grads\n    \n    state['m'] = m\n    return params, state",
+    "recent_errors": [],
+    "research_notes": [
+        "El dataset tiene 20% de ruido extremo. Usa np.sign(grads) para ignorar la magnitud de los outliers y usar solo la direcci\u00c3\u00b3n.",
+        "NUNCA sumes un escalar global directamente a un vector de gradientes (ej. grads + m). Los escalares solo deben usarse para multiplicar/dividir (escalar el learning rate)."
+    ]
+}

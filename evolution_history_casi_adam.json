@@ -1,0 +1,6 @@
+{
+    "generation": 12,
+    "best_fitness": 0.13506655625368202,
+    "best_code": "def update_step(params, grads, state, hyperparams):\n    lr = hyperparams['lr']\n    beta1 = hyperparams['beta1']\n    beta2 = hyperparams['beta2']\n    eps = hyperparams['eps']\n    \n    # Initialize state if not present\n    state.setdefault('m', np.zeros_like(params))\n    state.setdefault('v', np.zeros_like(params))\n    state.setdefault('t', 0)\n    \n    # Update step count for bias correction\n    state['t'] += 1\n    \n    # Update momentum and variance\n    m = beta1 * state['m'] + (1 - beta1) * grads\n    v = beta2 * state['v'] + (1 - beta2) * (grads ** 2)\n    \n    # Apply bias correction\n    m_hat = m / (1 - beta1**state['t'])\n    v_hat = v / (1 - beta2**state['t'])\n    \n    # Update parameters with corrected moments\n    params = params - lr * m_hat / np.sqrt(v_hat + eps)\n    \n    # Update state for next step\n    state['m'] = m\n    state['v'] = v\n    \n    return params, state",
+    "recent_errors": []
+}

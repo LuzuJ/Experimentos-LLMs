@@ -1,0 +1,10 @@
+{
+    "generation": 32,
+    "best_fitness": 0.20367726887252977,
+    "best_code": "def update_step(params, grads, state, hyperparams):\n    lr = hyperparams.get('lr', 0.001)\n    c1 = hyperparams['c1']\n    c2 = hyperparams['c2']\n    c3 = hyperparams['c3']\n    \n    # Inicializa o actualiza el contador de pasos\n    state['t'] = state.get('t', 0) + 1\n    \n    # Calcula la varianza de los gradientes en mini-batches ruidosos\n    grad_var = np.var(grads, ddof=1)\n    \n    # Aplica correcci\u00f3n de sesgo temporal para estabilizar la varianza\n    if state.get('t', 0) > 1:\n        bias_correction = 1.0 - (c1 / (c1 + (state['t'] - 1)))\n    else:\n        bias_correction = 1.0\n    \n    # Ajusta el aprendizaje seg\u00fan la varianza\n    adjusted_lr = lr * (1.0 / (np.sqrt(grad_var) + 1e-8)) * bias_correction\n    \n    # Actualiza los par\u00e1metros\n    params = params - adjusted_lr * grads\n    \n    return params, state",
+    "recent_errors": [
+        "Error: Validaci\u00f3n AST fallida. Snippet: import numpy as np  def update_step(params, grads, state, hy...",
+        "Error: Fallo matem\u00e1tico: name 'c2' is not defined. Snippet: def update_step(params, grads, state, hyperparams):     lr =...",
+        "Error: Fallo fatal del Worker. Snippet: def update_step(params, grads, state, hyperparams):     lr =..."
+    ]
+}

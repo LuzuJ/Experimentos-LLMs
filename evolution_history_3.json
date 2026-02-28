@@ -1,0 +1,10 @@
+{
+    "generation": 72,
+    "best_fitness": 0.6872342726386041,
+    "best_code": "def update_step(params, grads, state, hyperparams):\n    lr = hyperparams.get('lr')\n    state['t'] = state.get('t', 0) + 1\n    if 'grads_history' not in state:\n        state['grads_history'] = []\n    state['grads_history'].append(grads)\n    if len(state['grads_history']) < 2:\n        return params - lr * grads, state\n    prev_grads = state['grads_history'][-2]\n    beta = hyperparams.get('beta', 0.9)\n    grad_hat = beta * state['grads_history'][-1] + (1 - beta) * prev_grads\n    grad_hat = grad_hat / (1 - beta**state['t'])\n    return params - lr * grad_hat, state",
+    "recent_errors": [
+        "Error: Fallo matem\u00e1tico: 'beta'. C\u00f3digo problem\u00e1tico:     lr = hyperparams['lr']...",
+        "Error: Fallo matem\u00e1tico: 'beta'. C\u00f3digo problem\u00e1tico:     lr = hyperparams['lr']...",
+        "Error: Fallo matem\u00e1tico: 'beta'. C\u00f3digo problem\u00e1tico:     lr = hyperparams['lr']..."
+    ]
+}

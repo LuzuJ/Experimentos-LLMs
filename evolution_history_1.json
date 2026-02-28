@@ -1,0 +1,6 @@
+{
+    "generation": 223,
+    "best_fitness": 2.5698296042572428e-11,
+    "best_code": "def update_step(params, grads, state, hyperparams):\n    lr = hyperparams.get('lr', 0.001)\n    momentum_decay = hyperparams.get('momentum_decay', 0.9)\n    beta = hyperparams.get('beta', 0.95)\n    v_t = beta * state.get('momentum', 0.0) + grads\n    state['momentum'] = (1 - momentum_decay) * state.get('momentum', 0.0) + momentum_decay * v_t\n    params = params - lr * v_t\n    return params, state",
+    "recent_errors": []
+}

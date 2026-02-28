@@ -1,0 +1,6 @@
+{
+    "generation": 9,
+    "best_fitness": 0.13501307839769092,
+    "best_code": "def update_step(params, grads, state, hyperparams):\n    lr = hyperparams.get('lr', 0.001)\n    momentum = hyperparams.get('momentum', 0.9)\n    beta1 = momentum\n    beta2 = hyperparams.get('beta2', 0.999)  # para adaptaci\u00f3n de varianza\n    eps = hyperparams.get('eps', 1e-8)\n    alpha = hyperparams.get('alpha', 0.9)  # para decoupling de la varianza\n    \n    if 'momentum' not in state:\n        state['momentum'] = np.zeros_like(params)\n    if 'variance' not in state:\n        state['variance'] = np.zeros_like(params)\n    \n    state['momentum'] = beta1 * state['momentum'] + (1 - beta1) * grads\n    state['variance'] = beta2 * state['variance'] + (1 - beta2) * (grads ** 2)\n    \n    # Correcci\u00f3n para evitar divisi\u00f3n por cero\n    state['variance'] = np.maximum(state['variance'], eps)\n    \n    # Actualizaci\u00f3n con adaptaci\u00f3n de varianza y decoupling\n    update = -lr * state['momentum'] / np.sqrt(state['variance'] + eps)\n    params = params + update\n    return params, state",
+    "recent_errors": []
+}
