@@ -36,7 +36,7 @@ Adam: Inicialmente aprende, pero memoriza rápidamente el ruido (overfitting), d
 
 Nuestro Optimizador (IA): Al ignorar la magnitud del gradiente y filtrar anomalías con la mediana de los signos, aísla la señal útil del ruido, superando el accuracy final de Adam sin utilizar la memoria RAM extra que este último requiere.
 
-(Añade aquí las imágenes de la gráfica generada en Colab)
+![alt text](image/results_vs_Adam.png)
 
 🛠️ Arquitectura del Motor Evolutivo
 
